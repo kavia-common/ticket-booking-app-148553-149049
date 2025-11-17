@@ -11,7 +11,12 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 REACT_APP_BACKEND_URL=http://localhost:3001
 ```
 
-2. Install deps:
+2. Install dependencies:
+- Recommended bootstrap (ensures pip install -r requirements.txt):
+```
+./install.sh
+```
+- Or directly:
 ```
 pip install -r requirements.txt
 ```
@@ -35,6 +40,16 @@ uvicorn src.api.main:app --host 0.0.0.0 --port 3001 --reload
 4. Generate OpenAPI:
 ```
 python -m src.api.generate_openapi
+```
+
+5. Quick verification
+- Import check:
+```
+python -c "import sqlalchemy, fastapi, pydantic; print('OK')"
+```
+- Uvicorn import/start check (will run until Ctrl+C):
+```
+uvicorn main:app --host 127.0.0.1 --port 3001
 ```
 
 Notes:
