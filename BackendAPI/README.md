@@ -22,7 +22,12 @@ pip install -r requirements.txt
 python run.py
 ```
 
-- Or direct uvicorn (ensure working directory is BackendAPI so module path resolves):
+- Or direct uvicorn with top-level shim (works from BackendAPI root):
+```
+uvicorn main:app --host 0.0.0.0 --port 3001 --reload
+```
+
+- Or direct uvicorn with full module path:
 ```
 uvicorn src.api.main:app --host 0.0.0.0 --port 3001 --reload
 ```
@@ -35,4 +40,4 @@ python -m src.api.generate_openapi
 Notes:
 - If `DATABASE_URL` is not set, the app falls back to an in-memory SQLite database for scaffolding.
 - Replace mock login with real authentication before production.
-- If you see "Error loading ASGI app. Could not import module 'main'", use `python run.py` or specify the full import path `src.api.main:app`. Ensure `src/api/__init__.py` exists (it does).
+- If you see "Error loading ASGI app. Could not import module 'main'", ensure you are in the `BackendAPI` directory (contains `main.py`) and run `uvicorn main:app ...`, or use `python run.py`. Ensure `src/api/__init__.py` exists (it does).
